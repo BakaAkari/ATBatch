@@ -20,7 +20,7 @@ bl_info = {
     "name": "ATBatch",
     "description": "批量操作对象数据工具 - UV通道、顶点色、顶点组、形态键、修改器、材质",
     "author": "Baka_Akari",
-    "version": (0, 0, 3),
+    "version": (0, 0, 5),
     "blender": (2, 8, 0),
     "location": "View3D > Sidebar > ATBatch",
     "warning": "",

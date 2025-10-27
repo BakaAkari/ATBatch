@@ -11,6 +11,7 @@ class VIEW3D_PT_atbatch(Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
     bl_category = "ATB"
+    bl_order = 2
     
     def draw(self, context):
         layout = self.layout
