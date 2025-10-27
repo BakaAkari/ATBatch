@@ -1,11 +1,12 @@
 import bpy
 from bpy.types import Panel
 from ..utils import data_collector
+from ..utils.translation import get_text
 
 
 class VIEW3D_PT_atbatch(Panel):
     """ATBatch主面板"""
-    bl_label = "ATBacth"
+    bl_label = "ATBatch"
     bl_idname = "VIEW3D_PT_atbatch"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
@@ -17,20 +18,20 @@ class VIEW3D_PT_atbatch(Panel):
         
         # 第一排按钮：UV、顶点色、顶点组
         row1 = layout.row(align=True)
-        row1.prop(props, "show_uv", text="UV", toggle=True)
-        row1.prop(props, "show_vcol", text="顶点色", toggle=True)
-        row1.prop(props, "show_vgroup", text="顶点组", toggle=True)
+        row1.prop(props, "show_uv", text=get_text("UV通道", context), toggle=True)
+        row1.prop(props, "show_vcol", text=get_text("顶点色", context), toggle=True)
+        row1.prop(props, "show_vgroup", text=get_text("顶点组", context), toggle=True)
         
         # 第二排按钮：形态键、修改器、材质
         row2 = layout.row(align=True)
-        row2.prop(props, "show_shapekey", text="形态键", toggle=True)
-        row2.prop(props, "show_modifier", text="修改器", toggle=True)
-        row2.prop(props, "show_material", text="材质", toggle=True)
+        row2.prop(props, "show_shapekey", text=get_text("形态键", context), toggle=True)
+        row2.prop(props, "show_modifier", text=get_text("修改器", context), toggle=True)
+        row2.prop(props, "show_material", text=get_text("材质", context), toggle=True)
 
 
 class VIEW3D_PT_atbatch_uv(Panel):
     """UV通道子面板"""
-    bl_label = "UV通道"
+    bl_label = "UV Channels"
     bl_idname = "VIEW3D_PT_atbatch_uv"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
@@ -56,7 +57,7 @@ class VIEW3D_PT_atbatch_uv(Panel):
             item.object_count = len(objects)
         
         if not props.uv_items:
-            layout.label(text="没有找到UV通道")
+            layout.label(text=get_text("没有找到UV通道", context))
             return
         
         # 使用template_list显示UV通道列表
@@ -69,15 +70,15 @@ class VIEW3D_PT_atbatch_uv(Panel):
             row.scale_x = 0.8
             
             # 重命名按钮
-            rename_op = row.operator("atbatch.rename_uv", text="重命名")
+            rename_op = row.operator("atbatch.rename_uv", text=get_text("重命名", context))
             rename_op.uv_name = selected_uv.name
             
             # 删除按钮
-            delete_op = row.operator("atbatch.delete_uv", text="删除")
+            delete_op = row.operator("atbatch.delete_uv", text=get_text("删除", context))
             delete_op.uv_name = selected_uv.name
             
             # 设为活动按钮
-            active_op = row.operator("atbatch.set_active_uv", text="活动")
+            active_op = row.operator("atbatch.set_active_uv", text=get_text("设为活动", context))
             active_op.uv_name = selected_uv.name
 
 
@@ -109,7 +110,7 @@ class VIEW3D_PT_atbatch_vcol(Panel):
             item.object_count = len(objects)
         
         if not props.vcol_items:
-            layout.label(text="没有找到顶点色")
+            layout.label(text=get_text("没有找到顶点色", context))
             return
         
         # 使用template_list显示顶点色列表
@@ -122,11 +123,11 @@ class VIEW3D_PT_atbatch_vcol(Panel):
             row.scale_x = 0.8
             
             # 重命名按钮
-            rename_op = row.operator("atbatch.rename_vcol", text="重命名")
+            rename_op = row.operator("atbatch.rename_vcol", text=get_text("重命名", context))
             rename_op.vcol_name = selected_vcol.name
             
             # 删除按钮
-            delete_op = row.operator("atbatch.delete_vcol", text="删除")
+            delete_op = row.operator("atbatch.delete_vcol", text=get_text("删除", context))
             delete_op.vcol_name = selected_vcol.name
 
 
@@ -158,7 +159,7 @@ class VIEW3D_PT_atbatch_vgroup(Panel):
             item.object_count = len(objects)
         
         if not props.vgroup_items:
-            layout.label(text="没有找到顶点组")
+            layout.label(text=get_text("没有找到顶点组", context))
             return
         
         # 使用template_list显示顶点组列表
@@ -171,11 +172,11 @@ class VIEW3D_PT_atbatch_vgroup(Panel):
             row.scale_x = 0.8
             
             # 重命名按钮
-            rename_op = row.operator("atbatch.rename_vgroup", text="重命名")
+            rename_op = row.operator("atbatch.rename_vgroup", text=get_text("重命名", context))
             rename_op.vgroup_name = selected_vgroup.name
             
             # 删除按钮
-            delete_op = row.operator("atbatch.delete_vgroup", text="删除")
+            delete_op = row.operator("atbatch.delete_vgroup", text=get_text("删除", context))
             delete_op.vgroup_name = selected_vgroup.name
 
 
@@ -207,7 +208,7 @@ class VIEW3D_PT_atbatch_shapekey(Panel):
             item.object_count = len(objects)
         
         if not props.shapekey_items:
-            layout.label(text="没有找到形态键")
+            layout.label(text=get_text("没有找到形态键", context))
             return
         
         # 使用template_list显示形态键列表
@@ -220,11 +221,11 @@ class VIEW3D_PT_atbatch_shapekey(Panel):
             row.scale_x = 0.8
             
             # 重命名按钮
-            rename_op = row.operator("atbatch.rename_shapekey", text="重命名")
+            rename_op = row.operator("atbatch.rename_shapekey", text=get_text("重命名", context))
             rename_op.shapekey_name = selected_shapekey.name
             
             # 删除按钮
-            delete_op = row.operator("atbatch.delete_shapekey", text="删除")
+            delete_op = row.operator("atbatch.delete_shapekey", text=get_text("删除", context))
             delete_op.shapekey_name = selected_shapekey.name
 
 
@@ -256,7 +257,7 @@ class VIEW3D_PT_atbatch_modifier(Panel):
             item.object_count = len(objects)
         
         if not props.modifier_items:
-            layout.label(text="没有找到修改器")
+            layout.label(text=get_text("没有找到修改器", context))
             return
         
         # 使用template_list显示修改器列表
@@ -269,11 +270,11 @@ class VIEW3D_PT_atbatch_modifier(Panel):
             row.scale_x = 0.8
             
             # 删除按钮
-            delete_op = row.operator("atbatch.delete_modifier", text="删除")
+            delete_op = row.operator("atbatch.delete_modifier", text=get_text("删除", context))
             delete_op.modifier_type = selected_modifier.name
             
             # 切换状态按钮
-            toggle_op = row.operator("atbatch.toggle_modifier", text="切换")
+            toggle_op = row.operator("atbatch.toggle_modifier", text=get_text("切换", context))
             toggle_op.modifier_type = selected_modifier.name
 
 
@@ -305,7 +306,7 @@ class VIEW3D_PT_atbatch_material(Panel):
             item.object_count = len(objects)
         
         if not props.material_items:
-            layout.label(text="没有找到材质")
+            layout.label(text=get_text("没有找到材质", context))
             return
         
         # 使用template_list显示材质列表
@@ -318,15 +319,15 @@ class VIEW3D_PT_atbatch_material(Panel):
             row.scale_x = 0.8
             
             # 重命名按钮
-            rename_op = row.operator("atbatch.rename_material", text="重命名")
+            rename_op = row.operator("atbatch.rename_material", text=get_text("重命名", context))
             rename_op.material_name = selected_material.name
             
             # 删除按钮
-            delete_op = row.operator("atbatch.delete_material", text="删除")
+            delete_op = row.operator("atbatch.delete_material", text=get_text("删除", context))
             delete_op.material_name = selected_material.name
             
             # 替换按钮
-            replace_op = row.operator("atbatch.replace_material", text="替换")
+            replace_op = row.operator("atbatch.replace_material", text=get_text("替换", context))
             replace_op.material_name = selected_material.name
 
 
