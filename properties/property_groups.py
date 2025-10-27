@@ -66,6 +66,14 @@ class ATBatchProperties(bpy.types.PropertyGroup):
     material_items: CollectionProperty(type=ATBatchMaterialItem)
     material_index: IntProperty(name="材质索引", default=0)
     
+    # 面板显示控制
+    show_uv: BoolProperty(name="显示UV", default=False)
+    show_vcol: BoolProperty(name="显示顶点色", default=False)
+    show_vgroup: BoolProperty(name="显示顶点组", default=False)
+    show_shapekey: BoolProperty(name="显示形态键", default=False)
+    show_modifier: BoolProperty(name="显示修改器", default=False)
+    show_material: BoolProperty(name="显示材质", default=False)
+    
     # 刷新标志
     refresh_data: BoolProperty(
         name="刷新数据",

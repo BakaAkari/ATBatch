@@ -5,7 +5,7 @@ from ..utils import data_collector
 
 class VIEW3D_PT_atbatch(Panel):
     """ATBatch主面板"""
-    bl_label = "ATB 批量操作"
+    bl_label = "ATBacth"
     bl_idname = "VIEW3D_PT_atbatch"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
@@ -13,7 +13,19 @@ class VIEW3D_PT_atbatch(Panel):
     
     def draw(self, context):
         layout = self.layout
-        layout.label(text="批量操作工具")
+        props = context.window_manager.atbatch_props
+        
+        # 第一排按钮：UV、顶点色、顶点组
+        row1 = layout.row(align=True)
+        row1.prop(props, "show_uv", text="UV", toggle=True)
+        row1.prop(props, "show_vcol", text="顶点色", toggle=True)
+        row1.prop(props, "show_vgroup", text="顶点组", toggle=True)
+        
+        # 第二排按钮：形态键、修改器、材质
+        row2 = layout.row(align=True)
+        row2.prop(props, "show_shapekey", text="形态键", toggle=True)
+        row2.prop(props, "show_modifier", text="修改器", toggle=True)
+        row2.prop(props, "show_material", text="材质", toggle=True)
 
 
 class VIEW3D_PT_atbatch_uv(Panel):
@@ -24,6 +36,10 @@ class VIEW3D_PT_atbatch_uv(Panel):
     bl_region_type = 'UI'
     bl_category = "ATB"
     bl_parent_id = "VIEW3D_PT_atbatch"
+    
+    @classmethod
+    def poll(cls, context):
+        return context.window_manager.atbatch_props.show_uv
     
     def draw(self, context):
         layout = self.layout
@@ -74,6 +90,10 @@ class VIEW3D_PT_atbatch_vcol(Panel):
     bl_category = "ATB"
     bl_parent_id = "VIEW3D_PT_atbatch"
     
+    @classmethod
+    def poll(cls, context):
+        return context.window_manager.atbatch_props.show_vcol
+    
     def draw(self, context):
         layout = self.layout
         props = context.window_manager.atbatch_props
@@ -118,6 +138,10 @@ class VIEW3D_PT_atbatch_vgroup(Panel):
     bl_region_type = 'UI'
     bl_category = "ATB"
     bl_parent_id = "VIEW3D_PT_atbatch"
+    
+    @classmethod
+    def poll(cls, context):
+        return context.window_manager.atbatch_props.show_vgroup
     
     def draw(self, context):
         layout = self.layout
@@ -164,6 +188,10 @@ class VIEW3D_PT_atbatch_shapekey(Panel):
     bl_category = "ATB"
     bl_parent_id = "VIEW3D_PT_atbatch"
     
+    @classmethod
+    def poll(cls, context):
+        return context.window_manager.atbatch_props.show_shapekey
+    
     def draw(self, context):
         layout = self.layout
         props = context.window_manager.atbatch_props
@@ -209,6 +237,10 @@ class VIEW3D_PT_atbatch_modifier(Panel):
     bl_category = "ATB"
     bl_parent_id = "VIEW3D_PT_atbatch"
     
+    @classmethod
+    def poll(cls, context):
+        return context.window_manager.atbatch_props.show_modifier
+    
     def draw(self, context):
         layout = self.layout
         props = context.window_manager.atbatch_props
@@ -253,6 +285,10 @@ class VIEW3D_PT_atbatch_material(Panel):
     bl_region_type = 'UI'
     bl_category = "ATB"
     bl_parent_id = "VIEW3D_PT_atbatch"
+    
+    @classmethod
+    def poll(cls, context):
+        return context.window_manager.atbatch_props.show_material
     
     def draw(self, context):
         layout = self.layout
